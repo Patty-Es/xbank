@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { suscribirseAUsuario } from '../services/userService'
 import { cerrarSesion } from '../services/authService'
+import Transferir from './Transferir'
+import Historial from './Historial'
 
 export default function Dashboard() {
   const { usuario } = useAuth()
@@ -79,9 +81,9 @@ export default function Dashboard() {
         <span className="saldo-monto">{formatearMonto(datosUsuario?.saldo)}</span>
       </div>
 
-      <p className="placeholder-note">
-        Siguiente paso: transferencias (RF3) e historial de movimientos (RF4).
-      </p>
+      <Transferir />
+
+            <Historial />
     </div>
   )
 }

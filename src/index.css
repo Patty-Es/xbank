@@ -104,3 +104,81 @@ input {
   color: #e6edf3;
   margin-bottom: 4px;
 }
+.historial-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+
+.historial-card h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.movimientos-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.movimiento-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #21262d;
+}
+
+.movimiento-item:last-child {
+  border-bottom: none;
+}
+
+.movimiento-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.movimiento-tipo {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.movimiento-tipo.enviado {
+  color: #f85149;
+}
+
+.movimiento-tipo.recibido {
+  color: #3fb950;
+}
+
+.movimiento-contraparte {
+  font-size: 0.95rem;
+}
+
+.movimiento-monto-fecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.movimiento-monto {
+  font-weight: 600;
+}
+
+.movimiento-monto.positivo {
+  color: #3fb950;
+}
+
+.movimiento-monto.negativo {
+  color: #f85149;
+}
+
+.movimiento-fecha {
+  font-size: 0.75rem;
+  color: #8b949e;
+}
