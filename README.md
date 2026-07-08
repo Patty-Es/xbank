@@ -87,9 +87,17 @@ componente tenga una sola responsabilidad.
 
 ## Reglas de seguridad de Firestore
 
-El proyecto se creó en "modo de prueba" para facilitar el desarrollo. Antes de
-la entrega final, se deben ajustar las reglas en Firebase Console (pestaña
-"Reglas" de Firestore) para restringir el acceso solo a usuarios autenticados.
+Las reglas restringen el acceso a usuarios autenticados:
+
+- `users/{userId}`: cualquier usuario logueado puede leer perfiles (necesario
+  para buscar destinatarios por email y mostrar nombres en el historial), pero
+  solo puede crear su propio documento al registrarse, y las actualizaciones
+  solo pueden modificar el campo `saldo` (necesario para que las
+  transferencias funcionen sin permitir que alguien edite el nombre o el
+  email de otro usuario).
+- `movimientos/{movId}`: solo pueden leerse por quienes participaron en el
+  movimiento (emisor o receptor), solo se crean si el usuario autenticado es
+  el emisor, y no se permite editarlos ni borrarlos.
 
 ## Progreso
 
