@@ -9,6 +9,7 @@ import { cerrarSesion } from '../services/authService'
 import Transferir from './Transferir'
 import Historial from './Historial'
 import DepositoRetiro from './DepositoRetiro'
+import Logo from './Logo'
 
 export default function Dashboard() {
   const { usuario } = useAuth()
@@ -79,7 +80,7 @@ export default function Dashboard() {
   return (
     <div className="container">
       <div className="dashboard-header">
-        <h1>XBank</h1>
+        <Logo />
         <div className="dashboard-header-acciones">
           <button type="button" className="btn-tema" onClick={handleToggleTema} title="Cambiar tema">
             {tema === 'oscuro' ? '☀️' : '🌙'}
@@ -90,9 +91,10 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <p>Hola, {datosUsuario?.nombre}</p>
+      <p className="bienvenida">Bienvenida, <strong>{datosUsuario?.nombre}</strong></p>
 
       <div className="saldo-card">
+        <span className="saldo-cuenta">Cuenta Vista · •••• {numeroCuenta(usuario.uid)}</span>
         <span className="saldo-label">Saldo disponible</span>
         <span className="saldo-monto">{formatearMonto(datosUsuario?.saldo)}</span>
       </div>
@@ -104,6 +106,14 @@ export default function Dashboard() {
       <Historial />
     </div>
   )
+}
+
+// Genera un número de cuenta de 4 dígitos a partir del UID del usuario.
+// Es siempre el mismo para el mismo usuario (determinístico), pero no
+// expone el UID real: solo lo usamos como identificador visual.
+function numeroCuenta(uid) {
+  const hash = uid.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
+  return String(hash % 9000 + 1000)
 }
 
 function formatearMonto(monto) {

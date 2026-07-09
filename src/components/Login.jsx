@@ -9,6 +9,7 @@
 
 import { useState } from 'react'
 import { registrarUsuario, iniciarSesion } from '../services/authService'
+import Logo from './Logo'
 
 export default function Login() {
   const [modoRegistro, setModoRegistro] = useState(false)
@@ -77,7 +78,7 @@ export default function Login() {
 
   return (
     <div className="container">
-      <h1>XBank</h1>
+      <div style={{ marginBottom: '8px' }}><Logo /></div>
       <h2>{modoRegistro ? 'Crear cuenta' : 'Iniciar sesión'}</h2>
 
       <form onSubmit={handleSubmit}>
