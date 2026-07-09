@@ -220,3 +220,100 @@ input {
   color: #e6edf3;
   font-size: 0.85rem;
 }
+
+/* ── Depósito / Retiro ── */
+.deposito-retiro-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+
+.deposito-retiro-card h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.dr-botones {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-deposito {
+  background: #1a7f37;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-deposito:hover:not(:disabled) {
+  background: #2ea043;
+}
+
+.btn-retiro {
+  background: #6e3b3b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-retiro:hover:not(:disabled) {
+  background: #f85149;
+}
+
+.btn-cancelar {
+  background: transparent;
+  border: 1px solid #30363d;
+  color: #8b949e;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-cancelar:hover:not(:disabled) {
+  border-color: #8b949e;
+}
+
+.dr-form {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dr-label {
+  color: #8b949e;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.dr-input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  background: #0d1117;
+  color: #e6edf3;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.dr-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.exito-text {
+  color: #3fb950;
+  font-size: 0.9rem;
+  margin: 8px 0 0;
+}

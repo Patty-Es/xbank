@@ -8,6 +8,7 @@ import { suscribirseAUsuario } from '../services/userService'
 import { cerrarSesion } from '../services/authService'
 import Transferir from './Transferir'
 import Historial from './Historial'
+import DepositoRetiro from './DepositoRetiro'
 
 export default function Dashboard() {
   const { usuario } = useAuth()
@@ -81,9 +82,11 @@ export default function Dashboard() {
         <span className="saldo-monto">{formatearMonto(datosUsuario?.saldo)}</span>
       </div>
 
+      <DepositoRetiro />
+
       <Transferir />
 
-            <Historial />
+      <Historial />
     </div>
   )
 }
