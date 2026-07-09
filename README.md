@@ -85,6 +85,13 @@ Los componentes nunca llaman a Firebase directamente: siempre pasan por un
 módulo de `services/`. Esto separa la lógica de datos de la UI y hace que cada
 componente tenga una sola responsabilidad.
 
+Los bonuses se implementaron sin librerías externas:
+
+- **Filtro/búsqueda en historial**: filtrado en memoria sobre los datos del `onSnapshot`, sin consultas extra a Firestore.
+- **useReducer + useContext para la sesión**: `AuthContext` usa `useReducer` con una sola acción (`SESION_RESUELTA`) para que la transición sea explícita e imposible de llamar de forma inconsistente.
+- **Depósito/retiro simulado**: componente `DepositoRetiro.jsx` con validaciones y `runTransaction` en `userService.js`, igual de atómico que las transferencias.
+- **Modo oscuro/claro persistente**: variables CSS en `:root` y `[data-tema="claro"]`, toggle en el header que guarda la preferencia en `localStorage`. Un script inline en `index.html` aplica el tema antes de que React renderice para evitar el flash de color.
+
 ## Reglas de seguridad de Firestore
 
 Las reglas restringen el acceso a usuarios autenticados:
@@ -108,3 +115,7 @@ Las reglas restringen el acceso a usuarios autenticados:
 - [x] RF3 — Transferencias (runTransaction, atómico)
 - [x] RF4 — Historial de movimientos (onSnapshot, tiempo real)
 - [x] RF5 — Cerrar sesión (botón funcional en el Dashboard)
+- [x] Bonus — Filtro y búsqueda en el historial (por tipo y contraparte)
+- [x] Bonus — useReducer + useContext para el estado global de sesión
+- [x] Bonus — Depósito y retiro simulado con validaciones y runTransaction
+- [x] Bonus — Modo oscuro/claro persistente con localStorage
