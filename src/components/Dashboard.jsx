@@ -2,7 +2,7 @@
 // RF2: muestra nombre y saldo del usuario, suscrito en tiempo real vía onSnapshot.
 // RF5: botón de logout.
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { suscribirseAUsuario } from '../services/userService'
 import { cerrarSesion } from '../services/authService'
@@ -16,6 +16,16 @@ export default function Dashboard() {
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
   const [cerrandoSesion, setCerrandoSesion] = useState(false)
+  const [tema, setTema] = useState(
+    () => localStorage.getItem('xbank-tema') || 'oscuro'
+  )
+
+  const handleToggleTema = useCallback(() => {
+    const nuevoTema = tema === 'oscuro' ? 'claro' : 'oscuro'
+    setTema(nuevoTema)
+    localStorage.setItem('xbank-tema', nuevoTema)
+    document.documentElement.setAttribute('data-tema', nuevoTema)
+  }, [tema])
 
   useEffect(() => {
     setCargando(true)
@@ -70,9 +80,14 @@ export default function Dashboard() {
     <div className="container">
       <div className="dashboard-header">
         <h1>XBank</h1>
-        <button type="button" onClick={handleLogout} disabled={cerrandoSesion}>
-          {cerrandoSesion ? 'Saliendo...' : 'Cerrar sesión'}
-        </button>
+        <div className="dashboard-header-acciones">
+          <button type="button" className="btn-tema" onClick={handleToggleTema} title="Cambiar tema">
+            {tema === 'oscuro' ? '☀️' : '🌙'}
+          </button>
+          <button type="button" onClick={handleLogout} disabled={cerrandoSesion}>
+            {cerrandoSesion ? 'Saliendo...' : 'Cerrar sesión'}
+          </button>
+        </div>
       </div>
 
       <p>Hola, {datosUsuario?.nombre}</p>

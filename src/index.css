@@ -1,3 +1,44 @@
+/* ── Variables de tema ── */
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --primary: #58a6ff;
+  --success: #3fb950;
+  --danger: #f85149;
+  --input-bg: #0d1117;
+  --btn-outline-border: #30363d;
+  --btn-outline-color: #58a6ff;
+  --movimiento-divider: #21262d;
+  --filtro-activo-bg: #1f6feb;
+  --btn-deposito-bg: #1a7f37;
+  --btn-deposito-hover: #2ea043;
+  --btn-retiro-bg: #6e3b3b;
+  --btn-retiro-hover: #f85149;
+}
+
+[data-tema="claro"] {
+  --bg: #ffffff;
+  --surface: #f6f8fa;
+  --border: #d0d7de;
+  --text: #1f2328;
+  --muted: #57606a;
+  --primary: #0969da;
+  --success: #1a7f37;
+  --danger: #cf222e;
+  --input-bg: #ffffff;
+  --btn-outline-border: #d0d7de;
+  --btn-outline-color: #0969da;
+  --movimiento-divider: #d0d7de;
+  --filtro-activo-bg: #0969da;
+  --btn-deposito-bg: #1a7f37;
+  --btn-deposito-hover: #2da44e;
+  --btn-retiro-bg: #a40e26;
+  --btn-retiro-hover: #cf222e;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,8 +46,9 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: #0d1117;
-  color: #e6edf3;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.2s, color 0.2s;
 }
 
 .container {
@@ -21,25 +63,55 @@ input, button {
 }
 
 .error-text {
-  color: #f85149;
+  color: var(--danger);
   font-size: 0.9rem;
   margin-top: 4px;
 }
 
+.exito-text {
+  color: var(--success);
+  font-size: 0.9rem;
+  margin: 8px 0 0;
+}
+
 .loading-text {
-  color: #8b949e;
+  color: var(--muted);
   font-style: italic;
 }
+
+/* ── Dashboard ── */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  gap: 8px;
+}
+
+.dashboard-header-acciones {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-tema {
+  background: transparent;
+  border: 1px solid var(--btn-outline-border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.btn-tema:hover {
+  border-color: var(--primary);
 }
 
 .saldo-card {
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px 24px;
   margin: 20px 0;
@@ -49,7 +121,7 @@ input, button {
 }
 
 .saldo-label {
-  color: #8b949e;
+  color: var(--muted);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -58,15 +130,16 @@ input, button {
 .saldo-monto {
   font-size: 2rem;
   font-weight: 700;
-  color: #58a6ff;
+  color: var(--primary);
 }
 
 .placeholder-note {
-  color: #8b949e;
+  color: var(--muted);
   font-size: 0.9rem;
   font-style: italic;
 }
 
+/* ── Botones base ── */
 button {
   background: #238636;
   color: #fff;
@@ -77,14 +150,15 @@ button {
 }
 
 button:disabled {
-  background: #30363d;
+  background: var(--border);
   cursor: not-allowed;
+  color: var(--muted);
 }
 
 button[type="button"] {
   background: transparent;
-  border: 1px solid #30363d;
-  color: #58a6ff;
+  border: 1px solid var(--btn-outline-border);
+  color: var(--btn-outline-color);
 }
 
 label {
@@ -92,21 +166,23 @@ label {
   margin-top: 10px;
   margin-bottom: 4px;
   font-size: 0.9rem;
-  color: #8b949e;
+  color: var(--muted);
 }
 
 input {
   width: 100%;
   padding: 8px 10px;
   border-radius: 6px;
-  border: 1px solid #30363d;
-  background: #0d1117;
-  color: #e6edf3;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
   margin-bottom: 4px;
 }
+
+/* ── Historial ── */
 .historial-card {
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px 24px;
   margin: 20px 0;
@@ -128,7 +204,7 @@ input {
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #21262d;
+  border-bottom: 1px solid var(--movimiento-divider);
 }
 
 .movimiento-item:last-child {
@@ -147,13 +223,8 @@ input {
   letter-spacing: 0.5px;
 }
 
-.movimiento-tipo.enviado {
-  color: #f85149;
-}
-
-.movimiento-tipo.recibido {
-  color: #3fb950;
-}
+.movimiento-tipo.enviado { color: var(--danger); }
+.movimiento-tipo.recibido { color: var(--success); }
 
 .movimiento-contraparte {
   font-size: 0.95rem;
@@ -166,22 +237,16 @@ input {
   gap: 2px;
 }
 
-.movimiento-monto {
-  font-weight: 600;
-}
-
-.movimiento-monto.positivo {
-  color: #3fb950;
-}
-
-.movimiento-monto.negativo {
-  color: #f85149;
-}
+.movimiento-monto { font-weight: 600; }
+.movimiento-monto.positivo { color: var(--success); }
+.movimiento-monto.negativo { color: var(--danger); }
 
 .movimiento-fecha {
   font-size: 0.75rem;
-  color: #8b949e;
+  color: var(--muted);
 }
+
+/* ── Filtros historial ── */
 .historial-filtros {
   display: flex;
   flex-wrap: wrap;
@@ -196,8 +261,8 @@ input {
 
 .filtro-btn {
   background: transparent;
-  border: 1px solid #30363d;
-  color: #8b949e;
+  border: 1px solid var(--border);
+  color: var(--muted);
   border-radius: 6px;
   padding: 6px 12px;
   font-size: 0.85rem;
@@ -205,8 +270,8 @@ input {
 }
 
 .filtro-btn.activo {
-  background: #1f6feb;
-  border-color: #1f6feb;
+  background: var(--filtro-activo-bg);
+  border-color: var(--filtro-activo-bg);
   color: #fff;
 }
 
@@ -215,16 +280,16 @@ input {
   min-width: 160px;
   padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid #30363d;
-  background: #0d1117;
-  color: #e6edf3;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
   font-size: 0.85rem;
 }
 
 /* ── Depósito / Retiro ── */
 .deposito-retiro-card {
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px 24px;
   margin: 20px 0;
@@ -242,7 +307,7 @@ input {
 }
 
 .btn-deposito {
-  background: #1a7f37;
+  background: var(--btn-deposito-bg);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -251,12 +316,10 @@ input {
   font-size: 0.95rem;
 }
 
-.btn-deposito:hover:not(:disabled) {
-  background: #2ea043;
-}
+.btn-deposito:hover:not(:disabled) { background: var(--btn-deposito-hover); }
 
 .btn-retiro {
-  background: #6e3b3b;
+  background: var(--btn-retiro-bg);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -265,23 +328,19 @@ input {
   font-size: 0.95rem;
 }
 
-.btn-retiro:hover:not(:disabled) {
-  background: #f85149;
-}
+.btn-retiro:hover:not(:disabled) { background: var(--btn-retiro-hover); }
 
 .btn-cancelar {
   background: transparent;
-  border: 1px solid #30363d;
-  color: #8b949e;
+  border: 1px solid var(--border);
+  color: var(--muted);
   border-radius: 6px;
   padding: 8px 16px;
   cursor: pointer;
   font-size: 0.95rem;
 }
 
-.btn-cancelar:hover:not(:disabled) {
-  border-color: #8b949e;
-}
+.btn-cancelar:hover:not(:disabled) { border-color: var(--muted); }
 
 .dr-form {
   margin-top: 12px;
@@ -291,7 +350,7 @@ input {
 }
 
 .dr-label {
-  color: #8b949e;
+  color: var(--muted);
   font-size: 0.85rem;
   margin: 0;
 }
@@ -299,9 +358,9 @@ input {
 .dr-input {
   padding: 8px 10px;
   border-radius: 6px;
-  border: 1px solid #30363d;
-  background: #0d1117;
-  color: #e6edf3;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
   width: 100%;
   font-size: 1rem;
 }
@@ -310,10 +369,4 @@ input {
   display: flex;
   gap: 10px;
   margin-top: 4px;
-}
-
-.exito-text {
-  color: #3fb950;
-  font-size: 0.9rem;
-  margin: 8px 0 0;
 }
