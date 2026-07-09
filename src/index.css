@@ -182,3 +182,41 @@ input {
   font-size: 0.75rem;
   color: #8b949e;
 }
+.historial-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.filtro-tipo-grupo {
+  display: flex;
+  gap: 6px;
+}
+
+.filtro-btn {
+  background: transparent;
+  border: 1px solid #30363d;
+  color: #8b949e;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.filtro-btn.activo {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #fff;
+}
+
+.filtro-busqueda {
+  flex: 1;
+  min-width: 160px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  background: #0d1117;
+  color: #e6edf3;
+  font-size: 0.85rem;
+}
