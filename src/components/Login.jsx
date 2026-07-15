@@ -81,7 +81,7 @@ export default function Login() {
       <div style={{ marginBottom: '8px' }}><Logo /></div>
       <h2>{modoRegistro ? 'Crear cuenta' : 'Iniciar sesión'}</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         {modoRegistro && (
           <div>
             <label htmlFor="nombre">Nombre</label>

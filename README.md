@@ -92,6 +92,40 @@ Los bonuses se implementaron sin librerías externas:
 - **Depósito/retiro simulado**: componente `DepositoRetiro.jsx` con validaciones y `runTransaction` en `userService.js`, igual de atómico que las transferencias.
 - **Modo oscuro/claro persistente**: variables CSS en `:root` y `[data-tema="claro"]`, toggle en el header que guarda la preferencia en `localStorage`. Un script inline en `index.html` aplica el tema antes de que React renderice para evitar el flash de color.
 
+## Testing unitario (Evaluación 2)
+
+### Ejecutar los tests
+
+```bash
+npm test            # corre todos los tests una sola vez
+npm run coverage    # corre los tests y genera reporte de cobertura
+```
+
+El reporte HTML de cobertura se genera en `coverage/index.html`.
+
+### Resultado de cobertura
+
+| Archivo | % Stmts | % Branch | % Funcs | % Lines |
+|---|---|---|---|---|
+| **All files** | **83.6** | **80.9** | **76.66** | **87.06** |
+| Historial.jsx | 62.79 | 68 | 57.14 | 71.05 |
+| Login.jsx | 91.42 | 89.28 | 88.88 | 91.17 |
+| Transferir.jsx | 100 | 90 | 100 | 100 |
+| validaciones.js | 94.11 | 95.45 | 100 | 94.11 |
+
+Cobertura global: **83.6% statements / 87.06% lines** (supera el mínimo del 70%).
+
+### Qué se refactorizó para facilitar el testing
+
+La lógica de validación que estaba inlined dentro de `Transferir.jsx` se extrajo a funciones puras independientes en `src/utils/validaciones.js` (`validarTransferencia` y `esEmailValido`). Esto permite testear esas reglas sin renderizar ningún componente React ni mockear Firebase. `Transferir.jsx` ahora importa y delega en esas funciones puras. Se agregó `noValidate` a los formularios de `Transferir.jsx` y `Login.jsx` para deshabilitar la validación HTML5 nativa del browser (que interfería con jsdom al bloquear el submit) y dejar que toda la validación ocurra en JavaScript.
+
+### Tests implementados
+
+- **RT1** — Configuración de Vitest: `vite.config.js` con entorno jsdom, `src/test/setup.js` con `@testing-library/jest-dom`.
+- **RT2** — `src/utils/validaciones.test.js`: 14 tests de funciones puras (happy path, email inválido, auto-transferencia, montos negativos/cero/decimales/texto, saldo insuficiente).
+- **RT3** — `src/components/Transferir.test.jsx`: 7 tests del formulario (renderizado, errores de validación sin llamar al servicio, llamada correcta al servicio, botón deshabilitado durante proceso, error visible del servicio). Firebase mockeado con `vi.mock`.
+- **RT4** — `src/components/Login.test.jsx` (6 tests) y `src/components/Historial.test.jsx` (4 tests, incluye verificación de cleanup del `onSnapshot` al desmontar el componente).
+
 ## Reglas de seguridad de Firestore
 
 Las reglas restringen el acceso a usuarios autenticados:

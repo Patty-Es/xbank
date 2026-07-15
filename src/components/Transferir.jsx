@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { realizarTransferencia } from '../services/transferService'
+import { validarTransferencia } from '../utils/validaciones'
 
 export default function Transferir({ onExito }) {
   const { usuario } = useAuth()
@@ -22,17 +23,12 @@ export default function Transferir({ onExito }) {
   }
 
   function validarFormulario() {
-    if (!emailDestinatario.trim()) {
-      return 'Ingresa el correo del destinatario.'
-    }
-    const montoNumerico = Number(monto)
-    if (!monto || Number.isNaN(montoNumerico) || montoNumerico <= 0) {
-      return 'Ingresa un monto válido, mayor a 0.'
-    }
-    if (emailDestinatario.trim().toLowerCase() === usuario.email.toLowerCase()) {
-      return 'No puedes transferirte dinero a ti mismo.'
-    }
-    return ''
+    return validarTransferencia({
+      emailDestinatario,
+      monto,
+      emailEmisor: usuario.email,
+      saldo: null, // el saldo real lo verifica runTransaction en el servicio
+    })
   }
 
   async function handleSubmit(event) {
@@ -75,7 +71,7 @@ export default function Transferir({ onExito }) {
         Transferir dinero
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <label htmlFor="emailDestinatario">Correo del destinatario</label>
         <input
           id="emailDestinatario"
